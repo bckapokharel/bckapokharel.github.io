@@ -2,7 +2,7 @@
 
 > Personal portfolio of Bishika Pokharel — cybersecurity student at UNT focused on SOC operations, governance, and offensive security.
 
-🔗 **Live site:** bckapokharel.github.io
+🔗 **Live site:** https://bckapokharel.github.io
 
 ---
 
