@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bishika Pokharel — Cybersecurity Portfolio</title>
+<meta name="description" content="Bishika Pokharel — Cybersecurity student at the University of North Texas. Portfolio of security projects, research papers, and internships." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e0d;
+    --bg-2: #0f1413;
+    --surface: #131918;
+    --line: #1f2725;
+    --text: #e8ece9;
+    --muted: #8a948e;
+    --dim: #5b655e;
+    --accent: #7dd9b6;
+    --accent-dim: #2d5d4a;
+    --warn: #ffb46b;
+    --danger: #ff7a8a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(125, 217, 182, 0.06), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(125, 217, 182, 0.04), transparent);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(125, 217, 182, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125, 217, 182, 0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  main, nav { position: relative; z-index: 2; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 14, 13, 0.7);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+  nav .logo::before { content: '> '; color: var(--dim); }
+  nav .logo::after {
+    content: '_';
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+  nav a .num { color: var(--dim); margin-right: 6px; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 48px;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero .tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.25s forwards;
+  }
+  .hero h1 .italic {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .hero .sub {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 720px;
+    line-height: 1.4;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.45s forwards;
+  }
+
+  .hero .meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--dim);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+  .hero .meta span { color: var(--text); margin-left: 8px; }
+  .hero .meta a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border 0.2s; }
+  .hero .meta a:hover { border-bottom: 1px solid var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero .rail {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--dim);
+    writing-mode: vertical-rl;
+    letter-spacing: 3px;
+  }
+  @media (max-width: 900px) { .hero .rail { display: none; } }
+
+  section {
+    padding: 120px 48px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 64px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-header .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.02em;
+  }
+  .section-header h2 .italic { font-style: italic; color: var(--muted); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 80px;
+  }
+  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .about p {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .about p .hl { color: var(--accent); font-style: italic; }
+  .about p strong { font-weight: 500; color: var(--text); }
+
+  .about-card {
+    border: 1px solid var(--line);
+    padding: 32px;
+    background: var(--surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    position: relative;
+  }
+  .about-card::before {
+    content: 'profile.yml';
+    position: absolute;
+    top: -10px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    color: var(--dim);
+    font-size: 10px;
+  }
+  .about-card .row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .about-card .row:last-child { border-bottom: none; }
+  .about-card .key { color: var(--accent); width: 130px; flex-shrink: 0; }
+  .about-card .val { color: var(--text); }
+
+  .timeline { display: flex; flex-direction: column; gap: 8px; }
+  .exp {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    transition: padding 0.3s;
+  }
+  .exp:hover { padding-left: 16px; }
+  .exp:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 750px) {
+    .exp { grid-template-columns: 1fr; gap: 12px; }
+  }
+  .exp .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.5px;
+    padding-top: 6px;
+  }
+  .exp h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+  .exp h3 .at { color: var(--accent); font-style: italic; font-weight: 300; }
+  .exp .role-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .exp ul { list-style: none; }
+  .exp li {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .exp li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 2px;
+  }
+  .exp li strong { color: var(--text); font-weight: 500; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 850px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  .project {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 36px 32px;
+    position: relative;
+    transition: all 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .project::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  .project:hover { border-color: var(--accent-dim); transform: translateY(-4px); }
+  .project:hover::before { width: 100%; }
+
+  .project .meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .project .pid {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .project .pdate {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.5px;
+  }
+  .project h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .project .tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .project p.desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .project .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .project .tech span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    padding: 4px 10px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 2px;
+    letter-spacing: 0.3px;
+  }
+  .project .links {
+    margin-top: auto;
+    display: flex;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line);
+  }
+  .project .links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .project .links a:hover { color: var(--text); }
+
+  .terminal-demo {
+    margin-top: 48px;
+    background: #050807;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .terminal-demo .term-bar {
+    background: #0d1311;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .terminal-demo .term-bar .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .terminal-demo .term-bar .dot.r { background: #ff5f57; }
+  .terminal-demo .term-bar .dot.y { background: #febc2e; }
+  .terminal-demo .term-bar .dot.g { background: #28c840; }
+  .terminal-demo .term-bar .title {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .terminal-demo pre {
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  .terminal-demo .prompt { color: var(--accent); }
+  .terminal-demo .comment { color: var(--dim); }
+  .terminal-demo .menu { color: var(--warn); }
+  .terminal-demo .input { color: #88b8ff; }
+  .demo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  /* RESEARCH PAPERS */
+  .papers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .paper {
+    background: var(--surface);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 32px;
+    align-items: start;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .paper:hover { background: var(--bg-2); }
+  @media (max-width: 850px) {
+    .paper { grid-template-columns: 1fr; gap: 16px; padding: 28px; }
+  }
+
+  .paper .pdate {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    padding-top: 8px;
+  }
+  .paper .pcontent h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .paper .pcontent h3 .italic { font-style: italic; color: var(--accent); font-weight: 400; }
+  .paper .course {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .paper .course .sep { color: var(--dim); margin: 0 8px; }
+  .paper .abstract {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 720px;
+  }
+  .paper .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .paper .tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    padding: 3px 9px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 2px;
+    letter-spacing: 0.3px;
+  }
+  .paper .read-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 12px 18px;
+    border: 1px solid var(--accent-dim);
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    align-self: start;
+  }
+  .paper .read-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  @media (max-width: 850px) {
+    .paper .read-btn { align-self: flex-start; }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .skill-cat {
+    background: var(--bg);
+    padding: 28px;
+  }
+  .skill-cat h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .skill-cat h4::before { content: '// '; color: var(--dim); }
+  .skill-cat .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-cat .items span {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 4px 0;
+  }
+  .skill-cat .items span:not(:last-child)::after {
+    content: '·';
+    color: var(--dim);
+    margin-left: 8px;
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 750px) { .edu-grid { grid-template-columns: 1fr; } }
+
+  .edu-card {
+    border: 1px solid var(--line);
+    padding: 32px;
+    background: var(--surface);
+  }
+  .edu-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .edu-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .edu-card .sub-info {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .edu-card .stat-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+  }
+  .edu-card .stat-row > div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .edu-card .stat-row strong {
+    display: block;
+    color: var(--accent);
+    font-size: 22px;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .cert-list { list-style: none; }
+  .cert-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-list .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+  .cert-list .status.in-progress { color: var(--warn); border: 1px solid var(--warn); }
+  .cert-list .status.done { color: var(--accent); border: 1px solid var(--accent-dim); }
+
+  .contact {
+    text-align: center;
+    padding: 160px 48px;
+  }
+  .contact .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 48px;
+  }
+  .contact h2 .italic { font-style: italic; color: var(--accent); }
+  .contact .email-btn {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 18px 36px;
+    border: 1px solid var(--accent-dim);
+    transition: all 0.3s;
+    margin-bottom: 64px;
+  }
+  .contact .email-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .contact .socials {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .contact .socials a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .contact .socials a:hover { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    position: relative;
+    z-index: 2;
+  }
+  footer .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 800px) {
+    nav { padding: 14px 24px; }
+    nav ul { gap: 14px; }
+    nav a .num { display: none; }
+    section, .hero, .contact { padding-left: 24px; padding-right: 24px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">bishika.sec</div>
+  <ul>
+    <li><a href="#about"><span class="num">01.</span>about</a></li>
+    <li><a href="#experience"><span class="num">02.</span>experience</a></li>
+    <li><a href="#projects"><span class="num">03.</span>projects</a></li>
+    <li><a href="#research"><span class="num">04.</span>research</a></li>
+    <li><a href="#skills"><span class="num">05.</span>skills</a></li>
+    <li><a href="#contact"><span class="num">06.</span>contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="tag">// cybersecurity · b.s. '27 · denton, tx</div>
+    <h1>Bishika<br>Pokharel<span class="italic">.</span></h1>
+    <p class="sub">Cybersecurity student building <em>resilient systems</em>, hunting threats, and shipping clean code. Currently focused on SOC operations, network defense, and applied cryptography.</p>
+    <div class="meta">
+      <div>STATUS<span>available for summer '26</span></div>
+      <div>LOCATION<span>denton, tx</span></div>
+      <div>CONTACT<span><a href="mailto:bishikapokharel@my.unt.edu">bishikapokharel@my.unt.edu</a></span></div>
+    </div>
+    <div class="rail">SCROLL · 01 / 06</div>
+  </section>
+
+  <section id="about">
+    <div class="section-header">
+      <span class="num">01 /</span>
+      <h2>About <span class="italic">the analyst</span></h2>
+    </div>
+    <div class="about-grid about">
+      <div>
+        <p>I'm a junior at the <strong>University of North Texas</strong> studying cybersecurity, with internship experience defending <span class="hl">production WordPress environments</span>, writing incident response playbooks, and shipping Python automation that real teams use.</p>
+        <p>My work sits at the intersection of <span class="hl">offensive thinking and defensive engineering</span> — penetration testing federal court database systems one semester, then drafting NIST 800-53 aligned governance policies the next.</p>
+        <p>I'm drawn to problems where security meets clean systems design: reverse proxies, RBAC architectures, telemetry tuning. Currently preparing for <strong>ISC2 CC</strong> and <strong>CompTIA Security+</strong>.</p>
+      </div>
+      <div class="about-card">
+        <div class="row"><span class="key">name</span><span class="val">Bishika Pokharel</span></div>
+        <div class="row"><span class="key">role</span><span class="val">cybersecurity student</span></div>
+        <div class="row"><span class="key">school</span><span class="val">UNT · '27</span></div>
+        <div class="row"><span class="key">gpa</span><span class="val">3.5 / 4.0</span></div>
+        <div class="row"><span class="key">awards</span><span class="val">Dean's & President's List</span></div>
+        <div class="row"><span class="key">stack</span><span class="val">Python · C++ · Java · SQL</span></div>
+        <div class="row"><span class="key">focus</span><span class="val">SOC ops · governance · pentesting</span></div>
+        <div class="row"><span class="key">status</span><span class="val" style="color: var(--accent);">● open to summer '26 roles</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-header">
+      <span class="num">02 /</span>
+      <h2>Where I've <span class="italic">worked</span></h2>
+    </div>
+    <div class="timeline">
+
+      <div class="exp">
+        <div class="date">SEP 2025 — NOV 2025</div>
+        <div>
+          <h3>Cybersecurity Intern <span class="at">@ TLT — Tomorrow's Leaders Today</span></h3>
+          <div class="role-meta">remote · usa</div>
+          <ul>
+            <li>Monitored <strong>3+ WordPress environments</strong> with Wordfence and Sentry, triaging <strong>50+ weekly security events</strong> to safeguard production infrastructure.</li>
+            <li>Configured telemetry tuning rules that <strong>reduced false-positive alerts by 15%</strong>, saving 8+ analyst hours per week and improving SOC response times.</li>
+            <li>Authored <strong>12+ incident response reports</strong> and remediation playbooks, accelerating audit readiness across SOC 2-aligned compliance workflows.</li>
+            <li>Collaborated with a 5-member remote security team to patch <strong>20+ vulnerabilities at 100% on-time SLA</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="date">OCT 2024 — NOV 2024</div>
+        <div>
+          <h3>Python Intern <span class="at">@ Upskills Campus</span></h3>
+          <div class="role-meta">remote · india</div>
+          <ul>
+            <li>Engineered <strong>5+ Python automation tools</strong> using Pandas and NumPy, boosting log analysis throughput by 40% across 10,000+ daily records.</li>
+            <li>Architected CI/CD pipelines in GitHub Actions for 4 REST API integrations, <strong>cutting deployment time by 60%</strong> and supporting Azure cloud security initiatives.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-header">
+      <span class="num">03 /</span>
+      <h2>Selected <span class="italic">projects</span></h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project">
+        <div class="meta-top">
+          <span class="pid">// project_01</span>
+          <span class="pdate">JAN — MAY 2026</span>
+        </div>
+        <h3>Reverse Proxy Server</h3>
+        <p class="tagline">Layer 7 traffic forwarding with round-robin load balancing.</p>
+        <p class="desc">Built a Python reverse proxy over UDP sockets, forwarding 1,000+ client PING requests per cycle. Implemented round-robin distribution across 4 upstream instances, improving fault tolerance by 35% through automatic failover. Embedded upstream metadata into responses for transparent request tracing.</p>
+        <div class="tech">
+          <span>Python</span><span>UDP Sockets</span><span>Load Balancing</span><span>Networking</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/bckapokharel" target="_blank">→ view code</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="meta-top">
+          <span class="pid">// project_02</span>
+          <span class="pdate">AUG — DEC 2025</span>
+        </div>
+        <h3>Cybersecurity Plan & Risk Assessment</h3>
+        <p class="tagline">Enterprise governance aligned to NIST 800-53 and ISO 27001.</p>
+        <p class="desc">Authored 10 enterprise security policies covering risk management, incident response, and access control. Audited 3 virtualized environments using encryption analysis and network monitoring, surfacing 8+ threat indicators and 15+ permission misconfigurations.</p>
+        <div class="tech">
+          <span>NIST 800-53</span><span>ISO 27001</span><span>Auditing</span><span>Governance</span>
+        </div>
+        <div class="links">
+          <a href="#research">→ read paper</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="meta-top">
+          <span class="pid">// project_03</span>
+          <span class="pdate">MAY — AUG 2025</span>
+        </div>
+        <h3>QUECOURT — Federal Court Database</h3>
+        <p class="tagline">Normalized MySQL system with RBAC and offensive testing.</p>
+        <p class="desc">Architected a normalized MySQL database with 12+ tables modeled via ER diagrams, supporting 500+ judicial records for multi-user case management. Optimized 20+ SQL queries through indexing and joins (45% faster). Executed penetration testing on 5+ attack vectors including SQL injection and privilege escalation — remediated 100% pre-deployment.</p>
+        <div class="tech">
+          <span>MySQL</span><span>RBAC</span><span>SQL Injection</span><span>Pen Testing</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/bckapokharel" target="_blank">→ view code</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="meta-top">
+          <span class="pid">// project_04</span>
+          <span class="pdate">JAN — MAY 2025</span>
+        </div>
+        <h3>SimCity — Traffic Simulation</h3>
+        <p class="tagline">Agent-based pathfinding on a 100×100 grid.</p>
+        <p class="desc">Developed a C++ traffic simulation modeling 200+ concurrent vehicle agents on a 100×100 grid. Implemented and optimized A* and Dijkstra pathfinding algorithms, achieving 35% better travel efficiency over baseline routing.</p>
+        <div class="tech">
+          <span>C++</span><span>A* Search</span><span>Dijkstra</span><span>Simulation</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/bckapokharel" target="_blank">→ view code</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="meta-top">
+          <span class="pid">// project_05</span>
+          <span class="pdate">2024</span>
+        </div>
+        <h3>Expense Tracker — Java CLI</h3>
+        <p class="tagline">Menu-driven console app for personal finance tracking.</p>
+        <p class="desc">Built a console-based expense tracker in Java with full CRUD operations, custom category management, and stream-based filtering by date, category, or amount range. Generates monthly and category-wise spending reports with input validation via try/catch blocks for date parsing and number formatting.</p>
+        <div class="tech">
+          <span>Java</span><span>Streams API</span><span>LocalDate</span><span>OOP</span><span>CLI</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/bckapokharel/expense-tracker-java" target="_blank">→ view code</a>
+          <a href="#demo">→ see demo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <span class="demo-label" id="demo">// live demo — expense_tracker.java</span>
+    <div class="terminal-demo">
+      <div class="term-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="title">ExpenseTracker.java — bash</span>
+      </div>
+<pre><span class="comment">$ javac ExpenseTracker.java && java ExpenseTracker</span>
+
+<span class="menu">--- Expense Tracker Menu ---</span>
+1. Record Expense
+2. Manage Categories
+3. View Expenses
+4. Filter Expenses
+5. Modify/Delete Expense
+6. Generate Reports
+7. Exit
+<span class="prompt">Choose an option:</span> <span class="input">2</span>
+
+<span class="menu">--- Manage Categories ---</span>
+1. Add Category
+2. View Categories
+3. Delete Category
+<span class="prompt">Choose an option:</span> <span class="input">1</span>
+<span class="prompt">Enter category name:</span> <span class="input">Food</span>
+<span class="comment">✓ Category added successfully!</span>
+
+<span class="prompt">Choose an option:</span> <span class="input">1</span>
+<span class="prompt">Enter date (YYYY-MM-DD):</span> <span class="input">2026-05-26</span>
+<span class="prompt">Enter amount:</span> <span class="input">12.50</span>
+<span class="prompt">Enter category:</span> <span class="input">Food</span>
+<span class="prompt">Enter description:</span> <span class="input">Lunch at campus cafe</span>
+<span class="comment">✓ Expense recorded successfully!</span>
+
+<span class="prompt">Choose an option:</span> <span class="input">6</span>
+<span class="menu">--- Expense Reports ---</span>
+1. Monthly Report
+2. Category-wise Report
+<span class="prompt">Choose an option:</span> <span class="input">2</span>
+<span class="menu">Category-wise Expense Report:</span>
+Food: $12.50</pre>
+    </div>
+
+  </section>
+
+  <!-- ===== RESEARCH & WRITING ===== -->
+  <section id="research">
+    <div class="section-header">
+      <span class="num">04 /</span>
+      <h2>Research & <span class="italic">writing</span></h2>
+    </div>
+    <div class="papers-list">
+
+      <div class="paper">
+        <div class="pdate">NOV 2025</div>
+        <div class="pcontent">
+          <h3>Organizational Cybersecurity Policy Framework</h3>
+          <div class="course">CSCE 3550 · Computer Security<span class="sep">·</span>Dr. Ali Zarafshani<span class="sep">·</span>UNT</div>
+          <p class="abstract">A comprehensive framework of 10 enterprise security policies covering risk categorization, data classification, third-party vendor management, BYOD governance, network access, and client privacy. Aligned to NIST SP 800-37, NIST SP 800-53, ISO/IEC 27001, GDPR, and HIPAA. Each policy follows a standardized Purpose/Statement/Applicability/Enforcement/Authority structure for real-world organizational implementation.</p>
+          <div class="tags">
+            <span>NIST 800-53</span><span>ISO 27001</span><span>GDPR</span><span>HIPAA</span><span>Governance</span>
+          </div>
+        </div>
+        <a href="papers/Cybersecurity-Policy-Framework.pdf" target="_blank" class="read-btn">→ read pdf</a>
+      </div>
+
+      <div class="paper">
+        <div class="pdate">APR 2026</div>
+        <div class="pcontent">
+          <h3>The Role of AI in Cybersecurity <span class="italic">— Transformative Potential and Critical Limitations</span></h3>
+          <div class="course">INFO 4710 · IT Management<span class="sep">·</span>Prof. Stephen Lancaster<span class="sep">·</span>UNT</div>
+          <p class="abstract">A systematic review of AI-driven cybersecurity, tracing the evolution from rule-based detection to deep learning models for threat hunting, SIEM augmentation, and endpoint protection. Examines critical limitations including adversarial attacks, false-positive rates, and data bias — arguing for human-AI hybrid defense strategies grounded in PRISMA-aligned methodology.</p>
+          <div class="tags">
+            <span>Machine Learning</span><span>SIEM</span><span>Threat Detection</span><span>EDR</span><span>Adversarial AI</span>
+          </div>
+        </div>
+        <a href="papers/AI-in-Cybersecurity.pdf" target="_blank" class="read-btn">→ read pdf</a>
+      </div>
+
+      <div class="paper">
+        <div class="pdate">APR 2026</div>
+        <div class="pcontent">
+          <h3>The Impact of AI on Healthcare Delivery & Patient Outcomes</h3>
+          <div class="course">CSCE 4555 · Computer Forensics<span class="sep">·</span>Prof. Mark D. Hoffman<span class="sep">·</span>UNT</div>
+          <p class="abstract">A systematic literature review (89 studies, 2016–2026) examining how AI technologies improve diagnostic accuracy by 15–25%, reduce healthcare costs by 10–30%, and enhance patient outcomes. Addresses algorithmic bias, regulatory gaps, and equity concerns — with a 5-phase implementation roadmap for healthcare organizations.</p>
+          <div class="tags">
+            <span>Deep Learning</span><span>Clinical Validation</span><span>Algorithmic Bias</span><span>Health Equity</span><span>PRISMA</span>
+          </div>
+        </div>
+        <a href="papers/AI-in-Healthcare.pdf" target="_blank" class="read-btn">→ read pdf</a>
+      </div>
+
+      <div class="paper">
+        <div class="pdate">2026</div>
+        <div class="pcontent">
+          <h3>Online Privacy & Personal Data Collection <span class="italic">— A Kantian Ethical Analysis</span></h3>
+          <div class="course">Computer Science · Final Project<span class="sep">·</span>UNT</div>
+          <p class="abstract">An ethical analysis of US data collection practices through the lens of Kantian deontological philosophy. Argues that surveillance capitalism fails the Formula of Humanity, autonomous consent, and universalizability tests. Engages with empirical evidence on breaches and algorithmic discrimination, then refutes three common counter-arguments to advocate for comprehensive federal privacy legislation modeled on GDPR.</p>
+          <div class="tags">
+            <span>Privacy Ethics</span><span>GDPR</span><span>Kantian Ethics</span><span>Surveillance Capitalism</span><span>Policy</span>
+          </div>
+        </div>
+        <a href="papers/Online-Privacy-Kantian-Ethics.pdf" target="_blank" class="read-btn">→ read pdf</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header">
+      <span class="num">05 /</span>
+      <h2>Technical <span class="italic">stack</span></h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-cat">
+        <h4>Languages</h4>
+        <div class="items">
+          <span>Python</span><span>C/C++</span><span>Java</span><span>SQL</span><span>Bash</span><span>TypeScript</span><span>PowerShell</span><span>JavaScript</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>Security Tools</h4>
+        <div class="items">
+          <span>Wireshark</span><span>Metasploit</span><span>OpenVAS</span><span>Wordfence</span><span>Sentry</span><span>VMware</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>Databases</h4>
+        <div class="items">
+          <span>MySQL</span><span>PostgreSQL</span><span>Oracle</span><span>RBAC</span><span>ER Diagrams</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>Cloud & DevOps</h4>
+        <div class="items">
+          <span>Microsoft Azure</span><span>AWS</span><span>GCP</span><span>GitHub Actions</span><span>CI/CD</span><span>API Integration</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>Frameworks</h4>
+        <div class="items">
+          <span>NIST 800-53</span><span>ISO 27001</span><span>SOC 2</span><span>Incident Response</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>Tooling</h4>
+        <div class="items">
+          <span>Git</span><span>VS Code</span><span>Postman</span><span>Pandas</span><span>NumPy</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-header">
+      <span class="num">06 /</span>
+      <h2>Education & <span class="italic">credentials</span></h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="label">// degree</div>
+        <h3>B.S. Cybersecurity</h3>
+        <div class="sub-info">University of North Texas · Denton, TX</div>
+        <div class="sub-info">Expected May 2027</div>
+        <div class="stat-row">
+          <div><strong>3.5</strong>cumulative gpa</div>
+          <div><strong>4.0</strong>peak term gpa</div>
+          <div><strong>5x</strong>dean's list</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="label">// certifications</div>
+        <ul class="cert-list">
+          <li>Ethical Hacking <span class="status done">complete</span></li>
+          <li>ISC2 Certified in Cybersecurity (CC) <span class="status in-progress">in progress</span></li>
+          <li>CompTIA Security+ <span class="status in-progress">in progress</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="label">// 07 / let's connect</div>
+    <h2>Got an opening?<br><span class="italic">Let's talk.</span></h2>
+    <a href="mailto:bishikapokharel@my.unt.edu" class="email-btn">→ bishikapokharel@my.unt.edu</a>
+    <div class="socials">
+      <a href="https://www.linkedin.com/" target="_blank">LINKEDIN ↗</a>
+      <a href="https://github.com/bckapokharel" target="_blank">GITHUB ↗</a>
+      <a href="tel:5127514137">512.751.4137 ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="status-dot"></span> system online · built by bishika pokharel · denton, tx · 2026
+  </footer>
+
+</main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('reveal');
+    observer.observe(s);
+  });
+</script>
+
+</body>
+</html>
